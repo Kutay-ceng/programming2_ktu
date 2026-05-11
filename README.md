@@ -1,6 +1,9 @@
 # NumTool - Sayı Teorisi Hesaplama Aracı 🧮
 
 Bu proje, C programlama dili ile geliştirilmiş komut tabanlı bir sayı teorisi hesaplama aracıdır. Girdi olarak verilen bir metin dosyasındaki matematiksel komutları ayrıştırır (parsing), dinamik bellek üzerinde (Linked List) saklar ve optimize edilmiş algoritmalarla sonuçları bir çıktı dosyasına yazar.
+# Geliştiriciler 
+Kutay Keleş - https://github.com/Kutay-ceng/chatbot-ktu
+Ahmet Taha Dinç - https://github.com/moti-maze
 
 ## 🚀 Özellikler
 

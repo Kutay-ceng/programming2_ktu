@@ -34,8 +34,14 @@ int main(int argc, char *argv[]) {
     while (fgets(satir, sizeof(satir), giris_dosyasi) != NULL) {
         
         // '#' karakteri ile başlayan yorum satırlarını atla
-        if (satir[0] == '#') {
-            continue; 
+        char *p = satir;
+
+        while (*p != '\0' && isspace((unsigned char)*p)) {
+            p++;
+        }
+
+        if (*p == '#' || *p == '\0') {
+            continue;
         }
 
         // Aynı satırdaki komutları noktalı virgül (;) ve alt satır (\n) karakterine göre böl

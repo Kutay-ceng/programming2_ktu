@@ -53,33 +53,60 @@ void komutu_ayristir(char* okunan_metin, CommandRecord* kargo_kutusu) {
     char gecici_komut[20];
     long long sayi1, sayi2, sayi3;
 
-    // sscanf: Metnin içindeki ilk kelimeyi çeker.
-    int eslesme = sscanf(okunan_metin, "%s", gecici_komut);
-    if (eslesme <= 0) return; // Eğer okuyamazsa işlemi iptal et
+    kargo_kutusu->arg_count = 0;
+    kargo_kutusu->is_error = 0;
+    strcpy(kargo_kutusu->result, "");
 
-    // Yakaladığımız kelimeyi, kutumuzun komut etiketine kopyalıyoruz
+    int eslesme = sscanf(okunan_metin, "%19s", gecici_komut);
+
+    if (eslesme != 1) {
+        kargo_kutusu->is_error = 1;
+        strcpy(kargo_kutusu->command, "UNKNOWN");
+        strcpy(kargo_kutusu->result, "ERROR_INVALID_INPUT");
+        return;
+    }
+
     strcpy(kargo_kutusu->command, gecici_komut);
 
-    // Hangi komut olduğuna bakıp, sayıları ona göre cımbızlıyoruz
     if (strcmp(gecici_komut, "PHI") == 0 || strcmp(gecici_komut, "PRIME") == 0) {
-        // %*s komut adını atlar, %lld ilk sayıyı çeker
-        sscanf(okunan_metin, "%*s %lld", &sayi1); 
+        if (sscanf(okunan_metin, "%*s %lld", &sayi1) != 1) {
+            kargo_kutusu->is_error = 1;
+            strcpy(kargo_kutusu->result, "ERROR_INVALID_INPUT");
+            return;
+        }
+
         kargo_kutusu->args[0] = sayi1;
-        kargo_kutusu->arg_count = 1; // Çantaya 1 sayı koyduk
+        kargo_kutusu->arg_count = 1;
     } 
-    else if (strcmp(gecici_komut, "GCD") == 0 || strcmp(gecici_komut, "INV") == 0 || strcmp(gecici_komut, "CHECK") == 0) {
-        // İki sayı bekleyen komutlar
-        sscanf(okunan_metin, "%*s %lld %lld", &sayi1, &sayi2);
+    else if (
+        strcmp(gecici_komut, "GCD") == 0 ||
+        strcmp(gecici_komut, "INV") == 0 ||
+        strcmp(gecici_komut, "CHECK") == 0
+    ) {
+        if (sscanf(okunan_metin, "%*s %lld %lld", &sayi1, &sayi2) != 2) {
+            kargo_kutusu->is_error = 1;
+            strcpy(kargo_kutusu->result, "ERROR_INVALID_INPUT");
+            return;
+        }
+
         kargo_kutusu->args[0] = sayi1;
         kargo_kutusu->args[1] = sayi2;
-        kargo_kutusu->arg_count = 2; // Çantaya 2 sayı koyduk
+        kargo_kutusu->arg_count = 2;
     } 
     else if (strcmp(gecici_komut, "POW") == 0) {
-        // Üç sayı bekleyen komut 
-        sscanf(okunan_metin, "%*s %lld %lld %lld", &sayi1, &sayi2, &sayi3);
+        if (sscanf(okunan_metin, "%*s %lld %lld %lld", &sayi1, &sayi2, &sayi3) != 3) {
+            kargo_kutusu->is_error = 1;
+            strcpy(kargo_kutusu->result, "ERROR_INVALID_INPUT");
+            return;
+        }
+
         kargo_kutusu->args[0] = sayi1;
         kargo_kutusu->args[1] = sayi2;
         kargo_kutusu->args[2] = sayi3;
-        kargo_kutusu->arg_count = 3; // Çantaya 3 sayı koyduk
+        kargo_kutusu->arg_count = 3;
+    }
+    else {
+        kargo_kutusu->is_error = 1;
+        strcpy(kargo_kutusu->result, "ERROR_INVALID_INPUT");
     }
 }

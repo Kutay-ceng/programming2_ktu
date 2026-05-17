@@ -29,8 +29,8 @@ Projeyi kendi bilgisayarınızda çalıştırmak için aşağıdaki adımları i
 
 **1. Repoyu Klonlayın:**
 ```bash
-git clone [https://github.com/KULLANICI_ADIN/NumTool-C-Project.git](https://github.com/KULLANICI_ADIN/NumTool-C-Project.git)
-cd NumTool-C-Project
+git clone https://github.com/Kutay-ceng/programming2_ktu.git
+cd programming2_ktu
 
 Proje dosyalarını manuel derlemenize gerek yoktur. Terminalde sadece make komutunu çalıştırarak numtool isimli programı üretebilirsiniz.
 make

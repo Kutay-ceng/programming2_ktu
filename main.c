@@ -77,6 +77,14 @@ int main(int argc, char *argv[]) {
 
     // Bağlı listeyi baştan sona dolaşarak her bir komutu işlet
     while (islem_dugumu != NULL) {
+        if (islem_dugumu->data.is_error == 1) {
+            fprintf(cikis_dosyasi, "%s -> %s\n",
+                    islem_dugumu->data.command,
+                    islem_dugumu->data.result);
+
+            islem_dugumu = islem_dugumu->next;
+            continue;
+        }
         
         // --- PHI KOMUTU ---
         if (strcmp(islem_dugumu->data.command, "PHI") == 0) {

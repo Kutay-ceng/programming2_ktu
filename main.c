@@ -9,6 +9,7 @@
 #include <string.h>
 #include "parser.h"
 #include "math_utils.h"
+#include <ctype.h>
 
 int main(int argc, char *argv[]) {
     
